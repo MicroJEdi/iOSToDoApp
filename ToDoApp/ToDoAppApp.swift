@@ -10,14 +10,18 @@ import SwiftData
 
 @main
 struct ToDoAppApp: App {
+    
     var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
+        let persistedSchema = Schema([
+            Project.self,
+            List.self,
+            Item.self
         ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+        
+        let modelConfiguration = ModelConfiguration(schema: persistedSchema, isStoredInMemoryOnly: true)
 
         do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+            return try ModelContainer(for: persistedSchema, configurations: [modelConfiguration])
         } catch {
             fatalError("Could not create ModelContainer: \(error)")
         }
